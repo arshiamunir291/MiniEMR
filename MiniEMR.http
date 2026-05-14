@@ -1,0 +1,6 @@
+@MiniEMR_HostAddress = http://localhost:5098
+
+GET {{MiniEMR_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
