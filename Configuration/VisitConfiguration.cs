@@ -18,8 +18,9 @@ namespace MiniEMR.Configuration
 
             builder.HasKey(v => v.VisitId);
 
-            builder.HasIndex(v => v.AppointmentId)
-                   .IsUnique();
+            builder.HasIndex(x => x.AppointmentId)
+             .IsUnique()
+             .HasFilter("[AppointmentId] IS NOT NULL");
 
             builder.Property(v => v.AppointmentId)
                    .IsRequired(false);
@@ -49,7 +50,7 @@ namespace MiniEMR.Configuration
                    .IsRequired();
 
             builder.HasOne(v => v.Patient)
-                   .WithMany()
+                   .WithMany(p=>p.Visits)
                    .HasForeignKey(v => v.PatientId);
 
             builder.HasOne(v => v.Doctor)
@@ -58,9 +59,10 @@ namespace MiniEMR.Configuration
 
 
             builder.HasOne(v => v.Appointment)
-                   .WithOne()
+                   .WithOne(a=>a.Visit)
                    .HasForeignKey<Visit>(v => v.AppointmentId);
-                   
+            builder.Property(v => v.FollowUpInstructions)
+                    .HasMaxLength(500);
 
 
         }

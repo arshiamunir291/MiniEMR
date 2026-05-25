@@ -11,6 +11,7 @@ namespace MiniEMR.Controllers
     [ApiController]
     public class AuthController(IAuthService authService) : ControllerBase
     {
+        [AllowAnonymous]
         [HttpPost("login")]
         [ProducesResponseType(typeof(LoginResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -23,7 +24,6 @@ namespace MiniEMR.Controllers
             if (result == null) return Unauthorized(new {message="Invalid credentials"});
             return Ok(result);
         }
-        [Authorize]
         [HttpGet("me")]
         [ProducesResponseType(typeof(UserDetail), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -44,6 +44,14 @@ namespace MiniEMR.Controllers
                 return NotFound();
 
             return Ok(user);
+        }
+        [Authorize]
+        [HttpGet("doctors")]
+        public async Task<ActionResult<List<DoctorLookup>>> GetDoctors()
+        {
+            var doctors = await authService.GetDoctorsAsync();
+
+            return Ok(doctors);
         }
     }
 }

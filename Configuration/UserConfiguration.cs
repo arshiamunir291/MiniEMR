@@ -8,7 +8,8 @@ namespace MiniEMR.Configuration
     {
 
         public void Configure(EntityTypeBuilder<User> builder)
-        { 
+        {
+            builder.ToTable("Users");
             builder.HasKey(u => u.UserId);
 
             builder.HasIndex(u => u.UserName)

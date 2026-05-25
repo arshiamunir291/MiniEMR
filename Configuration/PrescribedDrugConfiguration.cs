@@ -4,10 +4,11 @@ using MiniEMR.Entities;
 
 namespace MiniEMR.Configuration
 {
-    public class PrescriptionConfiguration:IEntityTypeConfiguration<Prescription>
+    public class PrescribedDrugConfiguration:IEntityTypeConfiguration<PrescribedDrug>
     {
-        public void Configure(EntityTypeBuilder<Prescription> builder)
+        public void Configure(EntityTypeBuilder<PrescribedDrug> builder)
         {
+            builder.ToTable("PrescribedDrugs");
             builder.HasKey(p => p.PrescriptionId);
 
             builder.Property(p => p.Dosage)
@@ -20,18 +21,18 @@ namespace MiniEMR.Configuration
                    .IsRequired();
 
             builder.Property(p => p.Duration)
-                   .IsRequired()
-                   .HasMaxLength(50);
+                   .IsRequired();
+
 
             builder.Property(p => p.Instructions)
                    .HasMaxLength(500);
 
             builder.HasOne(p => p.Visit)
-                   .WithMany(v => v.Prescriptions)
+                   .WithMany(v => v.PrescribedDrugs)
                    .HasForeignKey(p => p.VisitId);
 
             builder.HasOne(p => p.Drug)
-                   .WithMany(d => d.Prescriptions)
+                   .WithMany(d => d.PrescribedDrugs)
                    .HasForeignKey(p => p.DrugId);
 
         }

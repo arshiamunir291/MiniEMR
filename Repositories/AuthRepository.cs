@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MiniEMR.Data;
 using MiniEMR.Entities;
+using MiniEMR.Enums;
 using MiniEMR.Repositories.Interfaces;
 
 namespace MiniEMR.Repositories
@@ -14,6 +15,13 @@ namespace MiniEMR.Repositories
         public async Task<User?> GetByUserIdAsync(int id)
         {
             return await _context.Users.FindAsync(id);
+        }
+        public async Task<List<User>> GetDoctorsAsync()
+        {
+            return await _context.Users
+                .Where(u => u.Role == UserRole.Doctor)
+                .OrderBy(u => u.FullName)
+                .ToListAsync();
         }
     }
 }

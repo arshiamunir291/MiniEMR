@@ -9,6 +9,7 @@ namespace MiniEMR.Configuration
     {
         public void Configure(EntityTypeBuilder<Drug> builder)
         {
+            builder.ToTable("Drugs");
             builder.Property(d => d.DrugForm)
                 .HasConversion<string>()
                  .HasMaxLength(30)
@@ -25,10 +26,6 @@ namespace MiniEMR.Configuration
 
             builder.Property(d => d.Strength)
                    .HasMaxLength(50);
-
-            builder.Property(d => d.DrugForm)
-                   .HasConversion<int>()
-                   .IsRequired();
 
             builder.Property(d => d.Manufacturer)
                    .HasMaxLength(100);

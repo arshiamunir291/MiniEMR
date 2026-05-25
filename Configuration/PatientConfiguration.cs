@@ -71,7 +71,9 @@ namespace MiniEMR.Configuration
                    .WithMany()
                    .HasForeignKey(p => p.UpdatedBy);
 
-
+            builder.HasMany(p => p.Visits)
+                    .WithOne(v => v.Patient)
+                    .HasForeignKey(v => v.PatientId);
         }
     }
 }

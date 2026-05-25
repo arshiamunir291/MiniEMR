@@ -12,6 +12,7 @@ namespace MiniEMR.Entities
         public string? Email { get; set; }
         public string? PhoneNumber { get; set; }
         public string? Specialization { get; set; } // For doctors
-        public bool IsActive { get; set; } 
+        public bool IsActive { get; set; }
+        public ICollection<DoctorSchedule> DoctorSchedules { get; set; } = new List<DoctorSchedule>();
     }
 }

@@ -11,7 +11,7 @@ namespace MiniEMR.Entities
         public DrugForm DrugForm { get; set; } 
         public string? Manufacturer { get; set; }
         public bool IsActive { get; set; }
-        public ICollection<Prescription> Prescriptions { get; set; } = new List<Prescription>();
+        public ICollection<PrescribedDrug> PrescribedDrugs { get; set; } = new List<PrescribedDrug>();
 
     }
 }

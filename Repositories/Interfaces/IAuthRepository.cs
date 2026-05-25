@@ -6,6 +6,7 @@ namespace MiniEMR.Repositories.Interfaces
     {
         Task<User?> GetByUserNameAsync(string username);
         Task<User?> GetByUserIdAsync(int id);
+        Task<List<User>> GetDoctorsAsync();
 
     }
 }

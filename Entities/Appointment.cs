@@ -17,13 +17,9 @@ namespace MiniEMR.Entities
         public int CreatedBy { get; set; }
         public int? UpdatedBy { get; set; }
         public Patient Patient { get; set; } = null!;
-
         public User Doctor { get; set; } = null!;
-
         public User CreatedByUser { get; set; } = null!;
-
         public User? UpdatedByUser { get; set; }
-
         public Visit? Visit { get; set; }
     }
 }

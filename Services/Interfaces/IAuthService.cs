@@ -6,5 +6,6 @@ namespace MiniEMR.Services.Interfaces
     {
         Task<LoginResponse?> LoginAsync(LoginRequest request);
         Task<UserDetail?> GetUserDetailAsync(int userId);
+        Task<List<DoctorLookup>> GetDoctorsAsync();
     }
 }

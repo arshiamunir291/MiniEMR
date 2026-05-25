@@ -64,5 +64,14 @@ namespace MiniEMR.Services
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+        public async Task<List<DoctorLookup>> GetDoctorsAsync()
+        {
+            var doctors=await authRepository.GetDoctorsAsync();
+            return doctors.Select(d=>new DoctorLookup
+            {
+                UserId = d.UserId,
+                FullName = d.FullName
+            }).ToList();
+        }
     }
 }
