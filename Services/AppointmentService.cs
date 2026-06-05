@@ -73,6 +73,13 @@ namespace MiniEMR.Services
         }
         public async Task<AppointmentResponse> CreateAppointmentAsync(CreateAppointment request, int createdByUserId)
         {
+            if (request.AppointmentDateTime <= DateTime.Now)
+            {
+                throw new Exception(
+                    "Cannot book an appointment in the past."
+                );
+            }
+
             try
             {
                 var appointment = new Appointment
@@ -169,6 +176,6 @@ namespace MiniEMR.Services
 
         }
 
-    }
+    }    
 }
 

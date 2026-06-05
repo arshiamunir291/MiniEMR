@@ -127,11 +127,14 @@ namespace MiniEMR.Repositories
                     current >= schedule.BreakStartTime &&
                     current < schedule.BreakEndTime;
                 var isBooked = bookedAppointments.Contains(current);
-                if (!isBreakTime && !isBooked)
+                var isPastSlot =
+                date.Date == DateTime.Today &&
+                current <= DateTime.Now.TimeOfDay;
+                if (!isBreakTime &&
+                    !isBooked &&
+                    !isPastSlot)
                 {
-                    slots.Add(current.ToString(@"hh\:mm")
-
-                    );
+                    slots.Add(current.ToString(@"hh\:mm"));
                 }
                 current = slotEnd;
 
